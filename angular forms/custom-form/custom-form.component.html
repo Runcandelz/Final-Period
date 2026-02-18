@@ -1,0 +1,144 @@
+<div class="form-wrapper">
+  <div class="form-card">
+
+    <div class="form-header">
+      <div class="badge">We're Hiring</div>
+      <h2>Job Application</h2>
+      <p class="subtitle">Fill out the form below to apply</p>
+    </div>
+
+    <!-- Success State -->
+    <div class="success-box" *ngIf="submitted">
+      <div class="success-icon">✓</div>
+      <h3>Application Submitted!</h3>
+      <p>Thank you for applying. We'll be in touch soon.</p>
+      <button class="btn-reset" (click)="onReset()">Apply Again</button>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="jobForm" (ngSubmit)="onSubmit()" *ngIf="!submitted">
+
+      <div class="section-title">Personal Information</div>
+
+      <!-- Full Name -->
+      <div class="form-group" [class.has-error]="f['fullName'].invalid && f['fullName'].touched">
+        <label>Full Name</label>
+        <input class="input-box" type="text" formControlName="fullName" placeholder="e.g. Juan Dela Cruz" />
+        <span class="error-msg" *ngIf="f['fullName'].errors?.['required'] && f['fullName'].touched">Full name is required.</span>
+        <span class="error-msg" *ngIf="f['fullName'].errors?.['minlength'] && f['fullName'].touched">Name must be at least 3 characters.</span>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group" [class.has-error]="f['email'].invalid && f['email'].touched">
+        <label>Email Address</label>
+        <input class="input-box" type="email" formControlName="email" placeholder="e.g. juan@email.com" />
+        <span class="error-msg" *ngIf="f['email'].invalid && f['email'].touched">A valid email is required.</span>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group" [class.has-error]="f['phone'].invalid && f['phone'].touched">
+        <label>Phone Number</label>
+        <input class="input-box" type="text" formControlName="phone" placeholder="e.g. 09123456789" />
+        <span class="error-msg" *ngIf="f['phone'].errors?.['required'] && f['phone'].touched">Phone number is required.</span>
+        <span class="error-msg" *ngIf="f['phone'].errors?.['pattern'] && f['phone'].touched">Must be an 11-digit phone number.</span>
+      </div>
+
+      <div class="section-title">Position Details</div>
+
+      <!-- Position -->
+      <div class="form-group" [class.has-error]="f['position'].invalid && f['position'].touched">
+        <label>Position Applying For</label>
+        <select class="input-box" formControlName="position">
+          <option value="" disabled selected>Select a position...</option>
+          <option value="frontend">Frontend Developer</option>
+          <option value="backend">Backend Developer</option>
+          <option value="fullstack">Full Stack Developer</option>
+          <option value="designer">UI/UX Designer</option>
+          <option value="qa">QA Engineer</option>
+        </select>
+        <span class="error-msg" *ngIf="f['position'].invalid && f['position'].touched">Please select a position.</span>
+      </div>
+
+      <!-- Experience -->
+      <div class="form-group" [class.has-error]="f['experience'].invalid && f['experience'].touched">
+        <label>Years of Experience</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" formControlName="experience" value="fresh" /> Fresh Graduate
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="experience" value="1-2" /> 1–2 years
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="experience" value="3-5" /> 3–5 years
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="experience" value="5+" /> 5+ years
+          </label>
+        </div>
+        <span class="error-msg" *ngIf="f['experience'].invalid && f['experience'].touched">Please select your experience level.</span>
+      </div>
+
+      <!-- Employment Type -->
+      <div class="form-group" [class.has-error]="f['employmentType'].invalid && f['employmentType'].touched">
+        <label>Employment Type</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" formControlName="employmentType" value="fulltime" /> Full-time
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="employmentType" value="parttime" /> Part-time
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="employmentType" value="contract" /> Contract
+          </label>
+        </div>
+        <span class="error-msg" *ngIf="f['employmentType'].invalid && f['employmentType'].touched">Please select employment type.</span>
+      </div>
+
+      <div class="section-title">Additional Details</div>
+
+      <!-- Availability -->
+      <div class="form-group" [class.has-error]="f['availability'].invalid && f['availability'].touched">
+        <label>Availability to Start</label>
+        <select class="input-box" formControlName="availability">
+          <option value="" disabled selected>Select availability...</option>
+          <option value="immediately">Immediately</option>
+          <option value="2weeks">2 Weeks Notice</option>
+          <option value="1month">1 Month Notice</option>
+          <option value="negotiable">Negotiable</option>
+        </select>
+        <span class="error-msg" *ngIf="f['availability'].invalid && f['availability'].touched">Please select your availability.</span>
+      </div>
+
+      <!-- Expected Salary -->
+      <div class="form-group" [class.has-error]="f['expectedSalary'].invalid && f['expectedSalary'].touched">
+        <label>Expected Monthly Salary (₱)</label>
+        <input class="input-box" type="number" formControlName="expectedSalary" placeholder="e.g. 25000" />
+        <span class="error-msg" *ngIf="f['expectedSalary'].invalid && f['expectedSalary'].touched">Please enter your expected salary.</span>
+      </div>
+
+      <!-- Cover Letter -->
+      <div class="form-group" [class.has-error]="f['coverLetter'].invalid && f['coverLetter'].touched">
+        <label>Cover Letter</label>
+        <textarea class="input-box" formControlName="coverLetter"
+          placeholder="Tell us why you're a great fit for this role... (min. 30 characters)"
+          rows="5"></textarea>
+        <span class="error-msg" *ngIf="f['coverLetter'].errors?.['required'] && f['coverLetter'].touched">Cover letter is required.</span>
+        <span class="error-msg" *ngIf="f['coverLetter'].errors?.['minlength'] && f['coverLetter'].touched">Cover letter must be at least 30 characters.</span>
+      </div>
+
+      <!-- Terms -->
+      <div class="form-group checkbox-group" [class.has-error]="f['agreeTerms'].invalid && f['agreeTerms'].touched">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="agreeTerms" />
+          I certify that all information provided is accurate and complete.
+        </label>
+        <span class="error-msg" *ngIf="f['agreeTerms'].invalid && f['agreeTerms'].touched">You must agree before submitting.</span>
+      </div>
+
+      <button class="btn-submit" type="submit">Submit Application</button>
+    </form>
+
+  </div>
+</div>
