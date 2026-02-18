@@ -1,0 +1,94 @@
+<div class="form-wrapper">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>User Registration</h2>
+      <p class="subtitle">Template-Driven Form Demo</p>
+    </div>
+
+    <div class="success-banner" *ngIf="submitted">
+      ✓ Form submitted successfully!
+    </div>
+
+    <form #myForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="!submitted">
+
+      <!-- Username -->
+      <div class="form-group" [class.has-error]="username.invalid && username.touched">
+        <label for="username">Username</label>
+        <input class="input-box" type="text" id="username" name="username"
+          [(ngModel)]="title" placeholder="Enter username" required #username="ngModel" />
+        <span class="error-msg" *ngIf="username.invalid && username.touched">Username is required.</span>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group" [class.has-error]="email.invalid && email.touched">
+        <label for="email">Email</label>
+        <input class="input-box" type="email" id="email" name="email"
+          [(ngModel)]="emailVal" placeholder="Enter email" required email #email="ngModel" />
+        <span class="error-msg" *ngIf="email.invalid && email.touched">A valid email is required.</span>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group" [class.has-error]="password.invalid && password.touched">
+        <label for="password">Password</label>
+        <input class="input-box" type="password" id="password" name="password"
+          [(ngModel)]="passwordVal" placeholder="Enter password" required minlength="6" #password="ngModel" />
+        <span class="error-msg" *ngIf="password.invalid && password.touched">Password must be at least 6 characters.</span>
+      </div>
+
+      <!-- Role -->
+      <div class="form-group" [class.has-error]="role.invalid && role.touched">
+        <label for="role">Role</label>
+        <select class="input-box" id="role" name="role"
+          [(ngModel)]="roleVal" required #role="ngModel">
+          <option value="" disabled selected>Select role...</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+          <option value="guest">Guest</option>
+        </select>
+        <span class="error-msg" *ngIf="role.invalid && role.touched">Please select a role.</span>
+      </div>
+
+      <!-- Gender -->
+      <div class="form-group" [class.has-error]="gender.invalid && gender.touched">
+        <label>Gender</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="gender" [(ngModel)]="genderVal" value="male" required #gender="ngModel" /> Male
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="gender" [(ngModel)]="genderVal" value="female" required /> Female
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="gender" [(ngModel)]="genderVal" value="prefer_not" required /> Prefer not to say
+          </label>
+        </div>
+        <span class="error-msg" *ngIf="gender.invalid && gender.touched">Please select a gender.</span>
+      </div>
+
+      <!-- Status -->
+      <div class="form-group" [class.has-error]="status.invalid && status.touched">
+        <label>Status</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="status" [(ngModel)]="statusVal" value="permanent" required #status="ngModel" /> Permanent
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="status" [(ngModel)]="statusVal" value="probationary" required /> Probationary
+          </label>
+        </div>
+        <span class="error-msg" *ngIf="status.invalid && status.touched">Please select a status.</span>
+      </div>
+
+      <!-- Comments -->
+      <div class="form-group" [class.has-error]="comments.invalid && comments.touched">
+        <label for="comments">Comments / Notes</label>
+        <textarea class="input-box" id="comments" name="comments"
+          [(ngModel)]="commentsVal" placeholder="Enter any additional notes..."
+          rows="4" required #comments="ngModel"></textarea>
+        <span class="error-msg" *ngIf="comments.invalid && comments.touched">Comments are required.</span>
+      </div>
+
+      <button class="btn-submit" type="submit" [disabled]="myForm.invalid">Submit</button>
+    </form>
+  </div>
+</div>
