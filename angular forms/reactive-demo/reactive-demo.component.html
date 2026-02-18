@@ -1,0 +1,89 @@
+<div class="form-wrapper">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>User Registration</h2>
+      <p class="subtitle">Reactive Form Demo</p>
+    </div>
+
+    <div class="success-banner" *ngIf="submitted">
+      ✓ Form submitted successfully!
+    </div>
+
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" *ngIf="!submitted">
+
+      <!-- Username -->
+      <div class="form-group" [class.has-error]="f['username'].invalid && f['username'].touched">
+        <label>Username</label>
+        <input class="input-box" type="text" formControlName="username" placeholder="Enter username" />
+        <span class="error-msg" *ngIf="f['username'].invalid && f['username'].touched">Username is required.</span>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group" [class.has-error]="f['email'].invalid && f['email'].touched">
+        <label>Email</label>
+        <input class="input-box" type="email" formControlName="email" placeholder="Enter email" />
+        <span class="error-msg" *ngIf="f['email'].invalid && f['email'].touched">A valid email is required.</span>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group" [class.has-error]="f['password'].invalid && f['password'].touched">
+        <label>Password</label>
+        <input class="input-box" type="password" formControlName="password" placeholder="Enter password" />
+        <span class="error-msg" *ngIf="f['password'].invalid && f['password'].touched">Password must be at least 6 characters.</span>
+      </div>
+
+      <!-- Role -->
+      <div class="form-group" [class.has-error]="f['role'].invalid && f['role'].touched">
+        <label>Role</label>
+        <select class="input-box" formControlName="role">
+          <option value="" disabled selected>Select role...</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+          <option value="guest">Guest</option>
+        </select>
+        <span class="error-msg" *ngIf="f['role'].invalid && f['role'].touched">Please select a role.</span>
+      </div>
+
+      <!-- Gender -->
+      <div class="form-group" [class.has-error]="f['gender'].invalid && f['gender'].touched">
+        <label>Gender</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" formControlName="gender" value="male" /> Male
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="gender" value="female" /> Female
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="gender" value="prefer_not" /> Prefer not to say
+          </label>
+        </div>
+        <span class="error-msg" *ngIf="f['gender'].invalid && f['gender'].touched">Please select a gender.</span>
+      </div>
+
+      <!-- Status -->
+      <div class="form-group" [class.has-error]="f['status'].invalid && f['status'].touched">
+        <label>Status</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" formControlName="status" value="permanent" /> Permanent
+          </label>
+          <label class="radio-label">
+            <input type="radio" formControlName="status" value="probationary" /> Probationary
+          </label>
+        </div>
+        <span class="error-msg" *ngIf="f['status'].invalid && f['status'].touched">Please select a status.</span>
+      </div>
+
+      <!-- Comments -->
+      <div class="form-group" [class.has-error]="f['comments'].invalid && f['comments'].touched">
+        <label>Comments / Notes</label>
+        <textarea class="input-box" formControlName="comments"
+          placeholder="Enter any additional notes..." rows="4"></textarea>
+        <span class="error-msg" *ngIf="f['comments'].invalid && f['comments'].touched">Comments are required.</span>
+      </div>
+
+      <button class="btn-submit" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
